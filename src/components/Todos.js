@@ -9,3 +9,42 @@
 //this view also has a 'create' button, that will render the CreateTodo view instead
 
 //STRETCH goal:: create 'prerequisites' which only allow changing status to DONE when other sub-todos are marked DONE
+
+//dummy data
+const dummyTodos = [
+    {
+     id: 1,
+     title: "Loop over this array of objects",
+     status: "IN PROGRESS",
+     checked: "X"
+    },
+    {
+        id: 2,
+        title: "Do some styling to it",
+        status: "IN PROGRESS",
+        checked: "X"
+       },
+       {
+        id: 1,
+        title: "make status clickable and changes checkmark",
+        status: "IN PROGRESS",
+        checked: "X"
+       }
+]
+
+function Todos(){
+    
+    return (
+        <div>
+            <h2>TODOS Master View</h2>
+            <div className="todos-wrapper">
+             { dummyTodos.map((todo)=>
+                { 
+                return ( 
+        <div>{todo.title} {todo.status} {todo.checked}</div>
+    )})}</div>
+        </div>
+    )
+}
+
+export default Todos;

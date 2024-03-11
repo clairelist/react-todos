@@ -4,8 +4,11 @@
     border-left: 4px solid silver;
     padding-left: 5px;
     margin-bottom: 12px;
+    margin-top: 6px;
 }
 
 .todo:hover{
     color: crimson;
+    cursor:copy;
+    /* copy for title, pointer (link) for status change and checkbox */
 }

@@ -43,7 +43,7 @@ function Todos(){
              { dummyTodos.map((todo)=>
                 { 
                 return ( 
-        <div className="todo">{todo.title} {todo.status} {todo.checked}</div>
+        <div className="todo">{todo.title} | {todo.status} | {todo.checked}</div>
     )})}</div>
         </div>
     )

@@ -1,0 +1,11 @@
+.todo{
+    display: grid;
+    border-top: 6px solid silver;
+    border-left: 4px solid silver;
+    padding-left: 5px;
+    margin-bottom: 12px;
+}
+
+.todo:hover{
+    color: crimson;
+}

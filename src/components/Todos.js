@@ -10,6 +10,8 @@
 
 //STRETCH goal:: create 'prerequisites' which only allow changing status to DONE when other sub-todos are marked DONE
 
+import './todos.css';
+
 //dummy data
 const dummyTodos = [
     {
@@ -41,7 +43,7 @@ function Todos(){
              { dummyTodos.map((todo)=>
                 { 
                 return ( 
-        <div>{todo.title} {todo.status} {todo.checked}</div>
+        <div className="todo">{todo.title} {todo.status} {todo.checked}</div>
     )})}</div>
         </div>
     )

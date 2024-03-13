@@ -5,3 +5,19 @@
 //SAVE or DISCARD your changes
 
 //STRETCH goal:: create 'prerequisites' which only allow changing status to DONE when other sub-todos are marked DONE
+
+import {useState} from 'react';
+
+function Todo(props){
+    const [editing, setEditing] = useState(true);
+    const {id, title} = props;
+    let description = 'some generic shit';
+    return (
+        <div id={id}>Singular Todo View YAA!
+            <h2>{title}</h2>
+            <p>{description}</p>
+        </div>
+    )
+}
+
+export default Todo;

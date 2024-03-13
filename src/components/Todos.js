@@ -11,6 +11,8 @@
 //STRETCH goal:: create 'prerequisites' which only allow changing status to DONE when other sub-todos are marked DONE
 
 import './todos.css';
+import Todo from './Todo';
+import {useState} from 'react';
 
 //dummy data
 const dummyTodos = [
@@ -27,7 +29,7 @@ const dummyTodos = [
         checked: "X"
        },
        {
-        id: 1,
+        id: 3,
         title: "make status clickable and changes checkmark",
         status: "IN PROGRESS",
         checked: "X"
@@ -35,6 +37,15 @@ const dummyTodos = [
 ]
 
 function Todos(){
+
+    const [editing, setEditing] = useState(false);
+
+    function handleClick(e){
+        e.preventDefault();
+        // console.log(e.target);
+        setEditing(true);
+    }
+    
     
     return (
         <div>
@@ -43,7 +54,11 @@ function Todos(){
              { dummyTodos.map((todo)=>
                 { 
                 return ( 
-        <div className="todo">{todo.title} | {todo.status} | {todo.checked}</div>
+        <div className="todo"> {todo.title} | {todo.status} | {todo.checked}
+        
+        <div className='single-view'>{editing ? <Todo id={todo.id} title={todo.title}  /> : <></>}</div>
+
+        </div>
     )})}</div>
         </div>
     )

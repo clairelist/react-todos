@@ -22,6 +22,8 @@ function Todos(){
 
     const [todo, setTodo] = useState("");
     const [todos, setTodos] = useState([]);
+    const [edit, setEdit] = useState(false);
+    const [update, setUpdate] = useState("");
 
     function handleSubmit(e){
         e.preventDefault();
@@ -39,6 +41,22 @@ function Todos(){
         const updatedTodos = [...todos].filter((todo)=>todo.id !== id);
         setTodos(updatedTodos);
     }
+
+    function handleUpdate(id){
+        const updatedTodo = {
+            id: id,
+            text: todo
+        }
+        setTodos([...todos].concat(updatedTodo));
+        setUpdate("") //filter? with the id passed in?
+        }
+    
+    function handleEdit(e){
+        return e.target.value;
+    }
+
+        
+    
     
     return (
         <div>
@@ -51,9 +69,22 @@ function Todos(){
              { todos.map((todo)=>
                 { 
                 return ( 
-        <div className="todo" key={todo.id}> {todo.text} | {todo.status} | <div><button onClick={()=>handleDelete(todo.id)}>Delete TODO.</button></div></div>
+        <div className="todo" key={todo.id}> {todo.text} | {todo.status} | <div>
+            <button onClick={()=>handleDelete(todo.id)}>Delete TODO.</button>
+            <button onClick={()=>setEdit(true)}>Edit TODO.</button>
+            </div>
+            {edit ? <div>
+            <form onSubmit={handleUpdate(todo.id)}>
+                <input type="text" onChange={(e)=>setUpdate(e.target.value)} value={update}/>
+                
+            </form>
+        </div>
+             : <></>}
+            </div>
         
-    )})}
+    )
+
+    })}
     
     </div>
         </div>

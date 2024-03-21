@@ -2,7 +2,10 @@
 //https://www.youtube.com/watch?v=EbnmosN64JQ
 //to follow along and also when you get stuck
 
-
+//TODOS FOR THIS PROGRAM::
+//FIX CSS SO THAT OUR X IS CENTERED (HAH!!)
+//ADD EDIT FUNCTIONALITY
+//SAVE OUR TODOS IN LOCAL STORAGE SO THAT WE CAN VIEW THEM ACROSS REFRESHES ETC
 //STRETCH goal:: create 'prerequisites' which only allow changing status to DONE when other sub-todos are marked DONE
 
 import './todos.css';

@@ -12,3 +12,45 @@
     cursor:copy;
     /* copy for title, pointer (link) for status change and checkbox */
 }
+
+input[type="checkbox"]{
+    -webkit-appearance: initial;
+    appearance: initial;
+    background: white;
+    width: 15px;
+    height: 15px;
+    
+    border: none;
+    position: relative;
+}
+input[type="checkbox"]:checked {
+    background: whitesmoke;
+}
+
+input[type="checkbox"]:checked:after {
+    /* Heres your symbol replacement */
+    display: block;
+    content: "×";
+    text-align: center;
+    max-height: 15px;
+    color: #282c34;
+    /* The following positions my tick in the center, 
+     * but you could just overlay the entire box
+     * with a full after element with a background if you want to */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    /*
+     * If you want to fully change the check appearance, use the following:
+     * content: " ";
+     * width: 100%;
+     * height: 100%;
+     * background: blue;
+     * top: 0;
+     * left: 0;
+     */
+}

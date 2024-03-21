@@ -1,12 +1,7 @@
-//collection of all todos view
-//a TODO has:
-//id, to determine which id is clicked and fetched by singular view
-//title, a short clickable description of the todo, viewable here
-//details, an extended description OR if null, the title of the todo again, viewable in singular todo view ONLY
-// status text, clickable either IN PROGRESS, DONE, or ABANDONED
-//checkbox, clickable that marks a checkmark when status is DONE or an X when ABANDONED 
 
-//this view also has a 'create' button, that will render the CreateTodo view instead
+//https://www.youtube.com/watch?v=EbnmosN64JQ
+//to follow along and also when you get stuck
+
 
 //STRETCH goal:: create 'prerequisites' which only allow changing status to DONE when other sub-todos are marked DONE
 
@@ -30,7 +25,7 @@ function Todos(){
         const newTodo = {
             id: new Date().getTime(),
             text: todo,
-            status: "IN PROGRESS"
+            status: false
         }
         // console.log(e.target.value);
         setTodos([...todos].concat(newTodo));
@@ -39,6 +34,19 @@ function Todos(){
     
     function handleDelete(id){
         const updatedTodos = [...todos].filter((todo)=>todo.id !== id);
+        setTodos(updatedTodos);
+    }
+
+    function toggleComplete(id){
+        //we need to actually MAP over each todo, that way we can edit the one we want
+        //and return that todo from our MAP.
+        //filter is no good here.
+        const updatedTodos = [...todos].map((todo)=>{
+            if (todo.id === id){
+                todo.status = !todo.status
+            }
+            return todo;
+        })
         setTodos(updatedTodos);
     }
 
@@ -69,17 +77,18 @@ function Todos(){
              { todos.map((todo)=>
                 { 
                 return ( 
-        <div className="todo" key={todo.id}> {todo.text} | {todo.status} | <div>
+        <div className="todo" key={todo.id}> {todo.text} | {todo.status ? "COMPLETED!" : "IN PROGRESS!"} | <div>
             <button onClick={()=>handleDelete(todo.id)}>Delete TODO.</button>
-            <button onClick={()=>setEdit(true)}>Edit TODO.</button>
+            {/* <button onClick={()=>setEdit(true)}>Edit TODO.</button> */}
+            <input type="checkbox" onChange={()=>toggleComplete(todo.id)}/>
             </div>
-            {edit ? <div>
+            {/* {edit ? <div>
             <form onSubmit={handleUpdate(todo.id)}>
                 <input type="text" onChange={(e)=>setUpdate(e.target.value)} value={update}/>
                 
             </form>
         </div>
-             : <></>}
+             : <></>} */}
             </div>
         
     )

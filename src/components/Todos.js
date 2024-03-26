@@ -53,13 +53,14 @@ function Todos(){
         setTodos(updatedTodos);
     }
 
-    function handleUpdate(id){
+    function handleUpdate(id, todo){
         const updatedTodo = {
             id: id,
-            text: todo
+            text: todo,
+            status: false
         }
         setTodos([...todos].concat(updatedTodo));
-        setUpdate("") //filter? with the id passed in?
+        setUpdate("") 
         }
     
     function handleEdit(e){
@@ -82,16 +83,16 @@ function Todos(){
                 return ( 
         <div className="todo" key={todo.id}> {todo.text} | {todo.status ? "COMPLETED!" : "IN PROGRESS!"} | <div>
             <button onClick={()=>handleDelete(todo.id)}>Delete TODO.</button>
-            {/* <button onClick={()=>setEdit(true)}>Edit TODO.</button> */}
+            <button onClick={()=>setEdit(true)}>Edit TODO.</button>
             <input type="checkbox" onChange={()=>toggleComplete(todo.id)}/>
             </div>
-            {/* {edit ? <div>
-            <form onSubmit={handleUpdate(todo.id)}>
+            {edit ? <div>
+            <form onSubmit={handleUpdate(todo.id, update)}>
                 <input type="text" onChange={(e)=>setUpdate(e.target.value)} value={update}/>
                 
             </form>
         </div>
-             : <></>} */}
+             : <></>}
             </div>
         
     )

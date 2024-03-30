@@ -9,8 +9,9 @@
 //STRETCH goal:: create 'prerequisites' which only allow changing status to DONE when other sub-todos are marked DONE
 
 import './todos.css';
-//import Todo from './Todo';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import useLocalStorage from './useLocalStorage';
+//useLocalStorage can only be used in a react function component, FUCK!
 
 //REMEMBER TO KISS:: KEEP IT SIMPLE, STUPID.
 
@@ -23,6 +24,22 @@ function Todos(){
     const [edit, setEdit] = useState(false);
     const [update, setUpdate] = useState("");
 
+    // useEffect(()=>{
+    //     //on load of page, get our todos and set thsoe into our todos state!
+    //     // setTodos(localStorage.getItem(todos));
+    //     if (localStorage.getItem(todos) == null) {
+    //         setTodos([]);
+    //     } else {
+    //         setTodos(localStorage.getItem(todos));
+    //     }
+    // }, [])
+
+    // if (localStorage.getItem(todos) == null) {
+    //     setTodos([]);
+    // } else {
+    //     setTodos(localStorage.getItem(todos));
+    // }
+
     function handleSubmit(e){
         e.preventDefault();
         const newTodo = {
@@ -32,6 +49,7 @@ function Todos(){
         }
         // console.log(e.target.value);
         setTodos([...todos].concat(newTodo));
+        localStorage.setItem([...todos], []);
         setTodo("");
     }
     
@@ -62,13 +80,6 @@ function Todos(){
         setTodos([...todos].concat(updatedTodo));
         setUpdate("") 
         }
-    
-    function handleEdit(e){
-        return e.target.value;
-    }
-
-        
-    
     
     return (
         <div>

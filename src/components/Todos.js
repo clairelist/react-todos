@@ -87,7 +87,7 @@ function Todos(){
     
     return (
         <div>
-            <h2>TODOS Master View</h2>
+            
             <div className="todos-wrapper">
                 <form onSubmit={handleSubmit}>
                     <input type="text" onChange={(e)=>setTodo(e.target.value)} value={todo}/>

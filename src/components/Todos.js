@@ -10,8 +10,6 @@
 
 import './todos.css';
 import {useState, useEffect} from 'react';
-import useLocalStorage from './useLocalStorage';
-//useLocalStorage can only be used in a react function component, FUCK!
 
 //REMEMBER TO KISS:: KEEP IT SIMPLE, STUPID.
 
@@ -24,21 +22,27 @@ function Todos(){
     const [edit, setEdit] = useState(false);
     const [update, setUpdate] = useState("");
 
-    // useEffect(()=>{
-    //     //on load of page, get our todos and set thsoe into our todos state!
-    //     // setTodos(localStorage.getItem(todos));
-    //     if (localStorage.getItem(todos) == null) {
-    //         setTodos([]);
-    //     } else {
-    //         setTodos(localStorage.getItem(todos));
-    //     }
-    // }, [])
 
-    // if (localStorage.getItem(todos) == null) {
-    //     setTodos([]);
-    // } else {
-    //     setTodos(localStorage.getItem(todos));
-    // }
+
+    useEffect(()=>{
+        const local = localStorage.getItem("list");
+        const loaded = JSON.parse(local);
+        
+        if (loaded) {
+            setTodos(loaded);
+            //console.log(todos);
+            } 
+        console.log(loaded);
+        }, [])
+
+    //update local storage, remember we need to stringify our todos!!!
+    useEffect(()=>{ 
+        const local = JSON.stringify(todos);
+        localStorage.setItem("list", local);
+    }, [todos])
+
+    //who could have predicted we need two useEffects!
+
 
     function handleSubmit(e){
         e.preventDefault();
@@ -49,7 +53,7 @@ function Todos(){
         }
         // console.log(e.target.value);
         setTodos([...todos].concat(newTodo));
-        localStorage.setItem([...todos], []);
+        localStorage.setItem(todos, []);
         setTodo("");
     }
     
@@ -94,16 +98,16 @@ function Todos(){
                 return ( 
         <div className="todo" key={todo.id}> {todo.text} | {todo.status ? "COMPLETED!" : "IN PROGRESS!"} | <div>
             <button onClick={()=>handleDelete(todo.id)}>Delete TODO.</button>
-            <button onClick={()=>setEdit(true)}>Edit TODO.</button>
+            
             <input type="checkbox" onChange={()=>toggleComplete(todo.id)}/>
             </div>
-            {edit ? <div>
+            {/* {edit ? <div>
             <form onSubmit={handleUpdate(todo.id, update)}>
                 <input type="text" onChange={(e)=>setUpdate(e.target.value)} value={update}/>
                 
             </form>
         </div>
-             : <></>}
+             : <></>} */}
             </div>
         
     )

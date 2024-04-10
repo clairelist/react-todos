@@ -19,8 +19,8 @@ function Todos(){
 
     const [todo, setTodo] = useState("");
     const [todos, setTodos] = useState([]);
-    const [edit, setEdit] = useState(false);
-    const [update, setUpdate] = useState("");
+    const [editId, setEditId] = useState(null);
+    const [update, setUpdate] = useState(todo.text || "");
 
 
 
@@ -75,14 +75,14 @@ function Todos(){
         setTodos(updatedTodos);
     }
 
-    function handleUpdate(id, todo){
-        const updatedTodo = {
-            id: id,
-            text: todo,
-            status: false
-        }
-        setTodos([...todos].concat(updatedTodo));
-        setUpdate("") 
+    function handleUpdate(id, update){ //I am a submit handler!
+        const updatedTodos = [...todos].map((todo)=>{
+            if (todo.id === id){
+                todo.text = update
+            }
+            return todo;
+        })
+        setTodos(updatedTodos);
         }
     
     return (
@@ -98,16 +98,17 @@ function Todos(){
                 return ( 
         <div className="todo" key={todo.id}> {todo.text} | {todo.status ? "COMPLETED!" : "IN PROGRESS!"} | <div>
             <button onClick={()=>handleDelete(todo.id)}>Delete TODO.</button>
-            
+            <button onClick={()=>{setEditId(todo.id)}}>EDIT TODO.</button>
             <input type="checkbox" onChange={()=>toggleComplete(todo.id)}/>
             </div>
-            {/* {edit ? <div>
-            <form onSubmit={handleUpdate(todo.id, update)}>
-                <input type="text" onChange={(e)=>setUpdate(e.target.value)} value={update}/>
+            {editId ? <div>
+            <form >
+                <input type="text" onChange={(e)=>setUpdate(e.target.value)} value={todo.id === editId ? update : todo.text}/>
+                <button onClick={()=>handleUpdate(editId, update)}>UPDATE todo.</button>
                 
             </form>
         </div>
-             : <></>} */}
+             : <></>}
             </div>
         
     )

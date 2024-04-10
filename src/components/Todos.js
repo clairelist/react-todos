@@ -1,18 +1,5 @@
-
-//https://www.youtube.com/watch?v=EbnmosN64JQ
-//to follow along and also when you get stuck
-
-//TODOS FOR THIS PROGRAM::
-//FIX CSS SO THAT OUR X IS CENTERED (HAH!!)
-//ADD EDIT FUNCTIONALITY
-//SAVE OUR TODOS IN LOCAL STORAGE SO THAT WE CAN VIEW THEM ACROSS REFRESHES ETC
-//STRETCH goal:: create 'prerequisites' which only allow changing status to DONE when other sub-todos are marked DONE
-
 import './todos.css';
 import {useState, useEffect} from 'react';
-
-//REMEMBER TO KISS:: KEEP IT SIMPLE, STUPID.
-
 
 function Todos(){
     //REMEMBER:: YOUR CLICK HANDLERS NEED TO BE CALLED AS AN ANON. FUNCTION OR IT WON'T WORK NO I PROMISE YOU IT WON'T.
@@ -22,27 +9,21 @@ function Todos(){
     const [editId, setEditId] = useState(null);
     const [update, setUpdate] = useState(todo.text || "");
 
-
-
-    useEffect(()=>{
+    useEffect(()=>{ //on load of page
         const local = localStorage.getItem("list");
         const loaded = JSON.parse(local);
-        
         if (loaded) {
             setTodos(loaded);
-            //console.log(todos);
             } 
         console.log(loaded);
         }, [])
 
     //update local storage, remember we need to stringify our todos!!!
+    //on todos array being updated
     useEffect(()=>{ 
         const local = JSON.stringify(todos);
         localStorage.setItem("list", local);
     }, [todos])
-
-    //who could have predicted we need two useEffects!
-
 
     function handleSubmit(e){
         e.preventDefault();
@@ -51,7 +32,6 @@ function Todos(){
             text: todo,
             status: false
         }
-        // console.log(e.target.value);
         setTodos([...todos].concat(newTodo));
         localStorage.setItem(todos, []);
         setTodo("");
@@ -63,9 +43,6 @@ function Todos(){
     }
 
     function toggleComplete(id){
-        //we need to actually MAP over each todo, that way we can edit the one we want
-        //and return that todo from our MAP.
-        //filter is no good here.
         const updatedTodos = [...todos].map((todo)=>{
             if (todo.id === id){
                 todo.status = !todo.status
@@ -110,11 +87,8 @@ function Todos(){
         </div>
              : <></>}
             </div>
-        
     )
-
     })}
-    
     </div>
         </div>
     )

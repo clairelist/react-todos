@@ -14,8 +14,7 @@ function Todos(){
         const loaded = JSON.parse(local);
         if (loaded) {
             setTodos(loaded);
-            } 
-        console.log(loaded);
+            }
         }, [])
 
     //update local storage, remember we need to stringify our todos!!!
@@ -32,7 +31,8 @@ function Todos(){
             text: todo,
             status: false
         }
-        setTodos([...todos].concat(newTodo));
+        todos.unshift(newTodo);
+        setTodos([...todos]); //<> concat
         localStorage.setItem(todos, []);
         setTodo("");
     }

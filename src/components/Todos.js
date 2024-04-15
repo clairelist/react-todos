@@ -73,16 +73,17 @@ function Todos(){
              { todos.map((todo)=>
                 { 
                 return ( 
-        <div className="todo" key={todo.id}> {todo.text} | {todo.status ? "COMPLETED!" : "IN PROGRESS!"} | <div>
+        <div className="todo" key={todo.id}> {todo.text}
+        <div> | {todo.status ? "COMPLETED!" : "IN PROGRESS!"} | </div>
+        <div>
             <button onClick={()=>handleDelete(todo.id)}>Delete TODO.</button>
             <button onClick={()=>{setEditId(todo.id)}}>EDIT TODO.</button>
-            <input type="checkbox" onChange={()=>toggleComplete(todo.id)}/>
+            <input type="checkbox" checked={todo.status} onChange={()=>toggleComplete(todo.id)}/>
             </div>
             {editId ? <div>
             <form >
                 <input type="text" onChange={(e)=>setUpdate(e.target.value)} value={todo.id === editId ? update : todo.text}/>
                 <button onClick={()=>handleUpdate(editId, update)}>UPDATE todo.</button>
-                
             </form>
         </div>
              : <></>}

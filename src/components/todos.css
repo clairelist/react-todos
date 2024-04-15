@@ -1,10 +1,12 @@
 .todo{
-    display: grid;
+    display: flex;
+    flex-direction: column;
     border-top: 6px solid silver;
     border-left: 4px solid silver;
     padding-left: 5px;
     margin-bottom: 12px;
     margin-top: 6px;
+    max-width: 60%
 }
 
 .todo:hover{
